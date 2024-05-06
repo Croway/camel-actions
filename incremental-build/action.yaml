@@ -39,12 +39,12 @@ runs:
   using: "composite"
   steps:
     - id: install-mvnd
-      uses: ./.github/actions/install-mvnd
+      uses: Croway/camel-actions/install-mvnd@main
       with:
         dry-run: ${{ inputs.skip-mvnd-install }}
     - name: maven build
       shell: bash
-      run: ${{ github.action_path }}/incremental-build.sh ${{ steps.install-mvnd.outputs.mvnd-dir }}/mvnd ${{ inputs.mode }} ${{ inputs.pr-id }}
+      run: ${{ github.action_path }}/incremental-build.sh ${{ steps.install-mvnd.outputs.mvnd-dir }}/mvnd ${{ inputs.mode }} ${{ inputs.pr-id }} ${{ inputs.github-repo }}
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
     - name: archive logs
